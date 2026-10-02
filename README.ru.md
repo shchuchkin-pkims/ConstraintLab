@@ -8,7 +8,7 @@
 с эталоном. Поэтому засчитывается любая эквивалентная запись (переменные, `expr`, другой порядок опций,
 `-to [get_cells …]` вместо `-to [get_pins …/D]`), а сообщения об ошибках указывают на первопричину.
 
-[English version](README.md)
+**Открыть онлайн: https://shchuchkin-pkims.github.io/ConstraintLab/?lang=ru** · [English version](README.md)
 
 ![ConstraintLab: задача со схемой, редактор и результат проверки](docs/img/screenshot-ru.png)
 
@@ -43,8 +43,7 @@
 - Открыть `index.html` в браузере (достаточно двойного щелчка).
 - Или `./run.sh` (Linux, macOS) и `run.bat` (Windows) – ConstraintLab откроется в отдельном окне.
 - Версия в одном файле: `python3 tools/build.py` создаёт `dist/constraintlab.html`.
-- В интернете: программа – статический сайт, её можно опубликовать через GitHub Pages прямо из корня
-  репозитория.
+- В интернете: https://shchuchkin-pkims.github.io/ConstraintLab/?lang=ru (GitHub Pages из корня репозитория).
 
 Прогресс, ответы и настройки хранятся в браузере (localStorage); меню ⋮ сохраняет прогресс в файл
 и загружает его на другом компьютере.

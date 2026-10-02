@@ -8,7 +8,7 @@ builds a model of clocks and timing paths and compares the resulting setup and h
 a reference solution. Any equivalent form is accepted (variables, `expr`, a different option order,
 `-to [get_cells …]` instead of `-to [get_pins …/D]`), and error messages point to the root cause.
 
-[Русская версия](README.ru.md)
+**Try it online: https://shchuchkin-pkims.github.io/ConstraintLab/** · [Русская версия](README.ru.md)
 
 ![ConstraintLab: a task with a schematic, the editor and the check result](docs/img/screenshot-en.png)
 
@@ -42,8 +42,7 @@ a reference solution. Any equivalent form is accepted (variables, `expr`, a diff
 - Open `index.html` in a browser (double-click is enough).
 - Or run `./run.sh` (Linux, macOS) or `run.bat` (Windows) to open ConstraintLab in a separate app window.
 - Single-file version: `python3 tools/build.py` creates `dist/constraintlab.html` with everything inside.
-- Online: the application is a static site, so it can be published with GitHub Pages directly from the
-  repository root.
+- Online: https://shchuchkin-pkims.github.io/ConstraintLab/ (GitHub Pages, served from the repository root).
 
 Progress, your answers and settings are stored in the browser (localStorage); the ⋮ menu saves progress
 to a file and loads it on another computer.
