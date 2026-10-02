@@ -1,0 +1,17 @@
+<!doctype html><html data-theme="light"><head><meta charset="utf-8"><link rel="stylesheet" href="../../css/app.css">
+<style>body{padding:12px;background:var(--panel);overflow:auto;height:auto} .q{border:1px solid #ccc;margin:10px 0;padding:8px;width:1100px} .q h3{margin:2px 0 6px;font-size:15px} .f{margin:6px 0;border-top:1px dashed #ddd;padding-top:4px} .f svg{max-width:1080px;height:auto}</style></head><body>
+<div id="out"></div>
+<script>window.XT_LANG = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'ru';</script>
+<script src="../../js/util.js"></script><script src="../../js/tcl.js"></script><script src="../../js/design.js"></script><script src="../../js/sdc.js"></script><script src="../../js/sta.js"></script><script src="../../js/checker.js"></script><script src="../../js/schematic.js"></script><script src="../../js/wave.js"></script><script src="../../js/md.js"></script><script src="../../js/bank-api.js"></script>
+<script>
+const file = new URLSearchParams(location.search).get('f');
+const s = document.createElement('script'); s.src = '../../bank/' + file;
+const render = () => { let h = ''; for (const q of XT.bank.list) { h += '<div class="q"><h3>' + q.id + ' – ' + XT.util.escapeHtml(q.title) + '</h3>'; for (const f of XT.questionFigures(q)) { let svg; try { svg = f.kind === 'schematic' ? XT.schematic.render(f.design || q.design, {}).svg : XT.wave.render(f, {}).svg; } catch (e) { svg = '<b style=color:red>ERR ' + e.message + '</b>'; } h += '<div class="f"><div style="font-size:12px;color:#666">' + XT.util.escapeHtml(f.title || f.kind) + '</div>' + svg + '</div>'; } h += '</div>'; } document.getElementById('out').innerHTML = h; };
+s.onload = () => {
+  if (XT.lang !== 'en') { render(); return; }
+  const t = document.createElement('script'); t.src = '../../bank/en/' + file;
+  t.onload = t.onerror = () => { XT.bank.applyLang('en'); render(); };
+  document.head.appendChild(t);
+};
+document.head.appendChild(s);
+</script></body></html>

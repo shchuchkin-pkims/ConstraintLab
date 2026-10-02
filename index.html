@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ConstraintLab – XDC/SDC</title>
+<meta name="description" content="ConstraintLab – интерактивный практикум по временным и физическим проектным ограничениям XDC (Vivado) и SDC (ASIC) с проверкой по смыслу">
+<meta name="author" content="Щучкин Евгений Юрьевич (Evgenii Shchuchkin), https://github.com/shchuchkin-pkims/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a7c76'/%3E%3Cpath d='M5 21h5V11h6v10h6V11h5' fill='none' stroke='white' stroke-width='2.4'/%3E%3C/svg%3E">
+<script>
+  (function () {
+    var s = {};
+    try { s = JSON.parse(localStorage.getItem('xdct.progress.v1') || '{}').settings || {}; } catch (e) {}
+    if (s.theme && s.theme !== 'auto') document.documentElement.dataset.theme = s.theme;
+    // язык: ?lang=en|ru в адресе, затем сохранённый выбор, затем язык браузера
+    var q = /[?&]lang=(en|ru)(&|$)/.exec(location.search);
+    var nav = String(navigator.language || 'ru').toLowerCase();
+    window.XT_LANG = q ? q[1] : (s.lang === 'en' || s.lang === 'ru' ? s.lang : (nav.indexOf('ru') === 0 ? 'ru' : 'en'));
+    document.documentElement.lang = window.XT_LANG;
+  })();
+</script>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app" class="app">
+  <header class="topbar">
+    <button id="btnMenu" class="icon-btn only-narrow" title="Список задач" aria-label="Список задач">☰</button>
+    <button class="brand" id="btnHome" title="На главную" style="border:0;background:none;cursor:pointer;padding:0"><span class="logo">CL</span><span>ConstraintLab <small id="brandSub">практикум по ограничениям XDC и SDC</small></span></button>
+    <div class="progress" id="progress"><div class="bar"><div class="fill"></div></div><span class="ptext"></span></div>
+    <div class="spacer"></div>
+    <button id="btnRef" class="tb-btn" title="Справочник по командам и статьи">📖 <span class="lbl">Справочник</span></button>
+    <button id="btnLang" class="icon-btn lang-btn" aria-label="Язык">EN</button>
+    <button id="btnLayout" class="icon-btn only-wide" aria-label="Расположение панели решения">⬓</button>
+    <button id="btnTheme" class="icon-btn" aria-label="Переключить тему">◐</button>
+    <div class="menu-wrap">
+      <button id="btnMore" class="icon-btn" aria-label="Меню">⋮</button>
+      <div class="menu" id="moreMenu" hidden>
+        <button data-a="author">✎ Режим автора: добавить задачу</button>
+        <button data-a="pack">⤓ Импорт пакета задач (.js/.json)</button>
+        <button data-a="packs">☰ Мои пакеты задач</button>
+        <hr>
+        <button data-a="export">⇩ Сохранить прогресс в файл</button>
+        <button data-a="import">⇧ Загрузить прогресс из файла</button>
+        <hr>
+        <button data-a="expected">◑ Показывать ожидаемые значения сразу (вкл/выкл)</button>
+        <button data-a="font+">A+ Крупнее шрифт редактора</button>
+        <button data-a="font-">A− Мельче шрифт редактора</button>
+        <hr>
+        <button data-a="reset">⟲ Сбросить прогресс…</button>
+        <button data-a="about">ⓘ О программе</button>
+      </div>
+    </div>
+  </header>
+  <aside id="sidebar" class="sidebar" aria-label="Задачи">
+    <div class="side-search">
+      <input id="search" type="search" placeholder="Поиск задач…" aria-label="Поиск задач">
+      <select id="filterTool" aria-label="Фильтр по синтаксису" title="Фильтр по синтаксису решения">
+        <option value="all">Все</option>
+        <option value="xdc">XDC (Vivado)</option>
+        <option value="sdc">SDC (ASIC)</option>
+        <option value="both">Общие для XDC и SDC</option>
+        <option value="xdc-only">Только XDC</option>
+        <option value="sdc-only">Только SDC</option>
+      </select>
+      <button id="btnFold" class="icon-btn fold-btn" title="Свернуть все темы" aria-label="Свернуть все темы">⊟</button>
+    </div>
+    <nav id="qlist" class="qlist"></nav>
+  </aside>
+  <main id="main" class="main">
+    <section id="taskPane" class="pane task-pane"><div class="empty">Загрузка…</div></section>
+    <div id="splitter" class="splitter" title="Потяните, чтобы изменить ширину панелей"></div>
+    <section id="workPane" class="pane work-pane"></section>
+  </main>
+</div>
+<div id="modal" class="modal" hidden></div>
+<noscript><p style="padding:20px">Для работы ConstraintLab нужен JavaScript.</p><p lang="en" style="padding:0 20px">ConstraintLab requires JavaScript.</p></noscript>
+
+<script src="js/util.js"></script>
+<script src="js/tcl.js"></script>
+<script src="js/design.js"></script>
+<script src="js/sdc.js"></script>
+<script src="js/sta.js"></script>
+<script src="js/checker.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/schematic.js"></script>
+<script src="js/wave.js"></script>
+<script src="js/md.js"></script>
+<script src="js/refdocs.js"></script>
+<script src="js/refdocs.en.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/bank-api.js"></script>
+<script src="js/validate.js"></script>
+<script src="bank/index.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

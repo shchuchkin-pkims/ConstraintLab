@@ -1,0 +1,63 @@
+{
+ "size": "1400,900",
+ "steps": [
+  {
+   "wait": 800,
+   "eval": "(() => { try { localStorage.clear(); } catch (e) {} location.reload(); return 'ok'; })()"
+  },
+  {
+   "wait": 1500,
+   "print": true,
+   "eval": "(() => { XT.app.openQ('ssin.ddr_center', { noFocus: true }); return '1 start: lang=' + XT.lang + ' href=' + location.href.replace(/^.*\\//, ''); })()"
+  },
+  {
+   "wait": 300,
+   "eval": "(() => { document.getElementById('btnLang').click(); return 'clicked'; })()"
+  },
+  {
+   "wait": 2000,
+   "print": true,
+   "eval": "(() => '2 after click: lang=' + XT.lang + ' btn=' + document.getElementById('btnLang').textContent + ' title=' + document.querySelector('.q-title, h1, .task-title')?.textContent.slice(0, 40) + ' href=' + location.href.replace(/^.*\\//, ''))()"
+  },
+  {
+   "wait": 300,
+   "eval": "(() => { document.getElementById('btnLang').click(); return 'clicked'; })()"
+  },
+  {
+   "wait": 2000,
+   "print": true,
+   "eval": "(() => '3 after 2nd click: lang=' + XT.lang + ' btn=' + document.getElementById('btnLang').textContent + ' title=' + document.querySelector('.q-title, h1, .task-title')?.textContent.slice(0, 40) + ' href=' + location.href.replace(/^.*\\//, ''))()"
+  },
+  {
+   "wait": 300,
+   "eval": "(() => { document.getElementById('btnHome').click(); return 'home'; })()"
+  },
+  {
+   "wait": 500,
+   "eval": "(() => { document.getElementById('btnLang').click(); return 'clicked'; })()"
+  },
+  {
+   "wait": 2000,
+   "print": true,
+   "eval": "(() => '4 from welcome: welcome=' + !!document.querySelector('#taskPane .welcome') + ' lang=' + XT.lang + ' btn=' + document.getElementById('btnLang').textContent + ' href=' + location.href.replace(/^.*\\//, ''))()"
+  },
+  {
+   "wait": 300,
+   "eval": "(() => { XT.app.openQ('cdc.gray', { noFocus: true }); document.getElementById('btnLang').click(); return 'clicked'; })()"
+  },
+  {
+   "wait": 2000,
+   "print": true,
+   "eval": "(() => '5 task after welcome switch: welcome=' + !!document.querySelector('#taskPane .welcome') + ' lang=' + XT.lang + ' href=' + location.href.replace(/^.*\\//, ''))()"
+  },
+  {
+   "wait": 300,
+   "eval": "(() => { location.reload(); return 'reload'; })()"
+  },
+  {
+   "wait": 2000,
+   "print": true,
+   "eval": "(() => '6 plain reload: welcome=' + !!document.querySelector('#taskPane .welcome') + ' lang=' + XT.lang + ' href=' + location.href.replace(/^.*\\//, ''))()"
+  }
+ ]
+}

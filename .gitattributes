@@ -1,0 +1,3 @@
+# пакетные файлы Windows – с переводами строк CRLF
+*.bat text eol=crlf
+*.sh text eol=lf

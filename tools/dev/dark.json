@@ -1,0 +1,1 @@
+{ "size": "1400,900", "dark": true, "steps": [ { "wait": 900, "eval": "location.hash='#q=iface.sdram'" }, { "wait": 700, "eval": "document.getElementById('taskPane').scrollTop = 520" }, { "wait": 200, "shot": "dark.png" } ] }

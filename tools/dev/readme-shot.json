@@ -1,0 +1,17 @@
+{
+ "size": "1600,1000",
+ "steps": [
+  {
+   "wait": 1000,
+   "eval": "(() => { try { localStorage.clear(); } catch (e) {} location.reload(); return \"ok\"; })()"
+  },
+  {
+   "wait": 1600,
+   "eval": "(async () => { const sl = (ms) => new Promise((r) => setTimeout(r, ms)); XT.app.openQ(\"ssin.ddr_center\", { noFocus: true }); await sl(200); const ta = document.querySelector(\".ed-ta\"); ta.value = \"create_clock -name adc_dco -period 4.0 [get_ports adc_dco_p]\\nset d [get_ports {adc_d_p[*]}]\\nset_input_delay -clock adc_dco -max 1.4 $d\\nset_input_delay -clock adc_dco -min 0.6 $d\\nset_input_delay -clock adc_dco -clock_fall -max 1.4 $d\\nset_input_delay -clock adc_dco -clock_fall -min 0.6 $d\\n\"; ta.dispatchEvent(new Event(\"input\")); await sl(80); document.getElementById(\"btnCheck\").click(); await sl(300); document.getElementById(\"taskPane\").scrollTop = 0; const a = document.querySelector(\".q-item.active\"); if (a) a.scrollIntoView({ block: \"center\" }); return \"ok\"; })()"
+  },
+  {
+   "wait": 700,
+   "shot": "screenshot.png"
+  }
+ ]
+}
